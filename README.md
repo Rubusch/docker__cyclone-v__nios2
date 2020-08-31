@@ -2,13 +2,22 @@
 
 Contains a Dockerfile for building an docker image and its container for the Software and BSP using buildroot.
 
+
 ## Build
 
+The setup needs a gmail email address for patch delivery via ``git send-email``, provide a valid gmail address if intended to work on patches  
+
+**NOTE** Replace ``gmail user name``, ``email@gmail.com`` and ``gmail password`` with your gmail credentials  
+
+**NOTE** For the gamil passwords containing ``<`` and ``>`` i.e. use escaped ``\\\<`` and ``\\\>``, in any case don't use quotes.  
 
 ```
-$ cd ./docker__buildroot/
-$ time docker build --build-arg USER=$USER -t rubuschl/nios2-buildroot:$(date +%Y%m%d%H%M%S) .
+$ cd ./docker
+
+$ time docker build --no-cache --build-arg USER=$USER --build-arg GMAIL_USER="<gmail user name>" --build-arg GMAIL=<email@gmail.com> --build-arg GMAIL_PASSW=<gmail password> -t rubuschl/nios2-buildroot:$(date +%Y%m%d%H%M%S) .
+    10m...
 ```
+
 Use ```--no-cache``` when re-implementing the docker image.
 
 
