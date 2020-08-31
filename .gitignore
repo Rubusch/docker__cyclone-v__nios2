@@ -1,0 +1,8 @@
+## backups
+*~
+*#
+*.orig
+
+## ignore output folder
+output
+dl
