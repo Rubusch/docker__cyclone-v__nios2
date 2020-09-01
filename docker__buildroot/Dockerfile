@@ -123,12 +123,12 @@ RUN cd /home/$USER && wget https://sourcery.mentor.com/GNUToolchain/package15987
 
 ## u-boot
 #RUN cd /home/$USER && git clone -j4 https://github.com/altera-opensource/u-boot-socfpga.git u-boot
-RUN cd /home/$USER && git clone -j4 --branch lothar/develop git@github.com:Rubusch/u-boot.git u-boot
+RUN cd /home/$USER && git clone -j4 --branch lothar/develop https://github.com/Rubusch/u-boot.git u-boot
 RUN chown $USER:$USER -R /home/$USER/u-boot
 
 ## kernel
 #RUN cd /home/$USER && git clone https://github.com/altera-opensource/linux-socfpga.git linux
-RUN cd /home/$USER && git clone --branch lothar/develop git@github.com:Rubusch/linux.git linux
+RUN cd /home/$USER && git clone --branch lothar/develop https://github.com/Rubusch/linux.git linux
 RUN chown $USER:$USER -R /home/$USER/linux
 
 
