@@ -40,7 +40,8 @@ RUN apt-get install -y  \
     xmlto \
     tree \
     colordiff \
-    sudo
+    sudo \
+    wget
 
 ## for building documentation targets
 RUN apt-get install -y  \
@@ -116,9 +117,9 @@ RUN cd /home/$USER && git clone -j4 --depth=1 --branch lothar/2020.05.x-nios2 ht
 RUN chown $USER:$USER -R /home/$USER/buildroot
 
 ## toolchain
-RUN cd /home/$USER && wget https://sourcery.mentor.com/GNUToolchain/package15987/public/nios2-linux-gnu/sourceryg++-2020.08-3-nios2-linux-gnu.src.tar.bz2 && tar xjf sourceryg++-2020.08-3-nios2-linux-gnu.src.tar.bz2
-
-RUN chown $USER:$USER -R /home/$USER/sourceryg++-2020.08-3-nios2-linux-gnu.src
+RUN cd /home/$USER && wget https://sourcery.mentor.com/GNUToolchain/package15987/public/nios2-linux-gnu/sourceryg++-2020.08-3-nios2-linux-gnu.src.tar.bz2
+#tar xjf ???
+#RUN chown $USER:$USER -R /home/$USER/sourceryg++-2020.08-3-nios2-linux-gnu.src
 
 ## u-boot
 RUN cd /home/$USER && git clone -j4 --branch lothar/develop https://github.com/altera-opensource/u-boot-socfpga.git u-boot
