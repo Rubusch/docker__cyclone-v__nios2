@@ -59,6 +59,8 @@ RUN apt-get install -y  \
 
 ## for building development environment
 RUN apt-get install -y  \
+    openjdk-11-jdk-headless \
+    openjdk-11-jdk \
     vim \
     libncurses5-dev \
     gcc \
