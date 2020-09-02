@@ -12,7 +12,7 @@ The setup needs a gmail email address for patch delivery via ``git send-email``,
 **NOTE** For the gamil passwords containing ``<`` and ``>`` i.e. use escaped ``\\\<`` and ``\\\>``, in any case don't use quotes.  
 
 ```
-$ cd ./docker
+$ cd ./docker__buildroot
 
 $ time docker build --no-cache --build-arg USER=$USER --build-arg GMAIL_USER="<gmail user name>" --build-arg GMAIL=<email@gmail.com> --build-arg GMAIL_PASSW=<gmail password> -t rubuschl/nios2-buildroot:$(date +%Y%m%d%H%M%S) .
     10m...
