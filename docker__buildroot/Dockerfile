@@ -1,4 +1,4 @@
-FROM debian:10
+FROM i386/debian:10
 MAINTAINER Lothar Rubusch <l.rubusch@gmail.com>
 WORKDIR /root
 ENV DEBIAN_FRONTEND=noninteractive
