@@ -119,9 +119,14 @@ RUN cd /home/$USER && git clone -j4 --depth=1 --branch lothar/2020.05.x-nios2 ht
 RUN chown $USER:$USER -R /home/$USER/buildroot
 
 ## toolchain
-RUN cd /home/$USER && wget https://sourcery.mentor.com/GNUToolchain/package15987/public/nios2-linux-gnu/sourceryg++-2020.08-3-nios2-linux-gnu.src.tar.bz2
-#tar xjf ???
-#RUN chown $USER:$USER -R /home/$USER/sourceryg++-2020.08-3-nios2-linux-gnu.src
+## source package (installer is not supposed to work, read preamble), most releases don't publish a .bin file!!!
+#RUN cd /home/$USER && wget https://sourcery.mentor.com/GNUToolchain/package15987/public/nios2-linux-gnu/sourceryg++-2020.08-3-nios2-linux-gnu.src.tar.bz2
+#RUN cd /home/$USER && tar xjf sourceryg++-2020.08-3-nios2-linux-gnu.src.tar.bz2
+#RUN chmod a+x /home/$USER/sourceryg++-2020.08-3-nios2-linux-gnu/sourceryg++-2020.08-3-nios2-linux-gnu.sh
+## .bin file
+RUN cd /home/$USER && wget https://sourcery.mentor.com/GNUToolchain/package15406/public/nios2-linux-gnu/sourceryg++-2018.05-5-nios2-linux-gnu.bin
+RUN chmod a+x /home/$USER/sourceryg++-2018.05-5-nios2-linux-gnu.bin
+RUN chown $USER:$USER -R /home/$USER/sourceryg++-2020.08-3-nios2-linux-gnu
 
 ## u-boot
 #RUN cd /home/$USER && git clone -j4 https://github.com/altera-opensource/u-boot-socfpga.git u-boot
