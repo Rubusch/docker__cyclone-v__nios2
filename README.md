@@ -14,11 +14,11 @@ The setup needs a gmail email address for patch delivery via ``git send-email``,
 ```
 $ cd ./docker__buildroot
 
-$ time docker build --no-cache --build-arg USER=$USER --build-arg GMAIL_USER="<gmail user name>" --build-arg GMAIL=<email@gmail.com> --build-arg GMAIL_PASSW=<gmail password> -t rubuschl/nios2-buildroot:$(date +%Y%m%d%H%M%S) .
+$ time docker build --build-arg USER=$USER -t rubuschl/nios2-buildroot:$(date +%Y%m%d%H%M%S) .
     10m...
 ```
 
-Use ```--no-cache``` when re-implementing the docker image.
+Use ```--no-cache``` to re-implementing the base docker image.
 
 
 ## Usage
