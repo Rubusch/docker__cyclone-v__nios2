@@ -1,6 +1,6 @@
 # Build Container for my linux on NIOS2 (softcore on Altera/Intel's DE1-SoC Board)
 
-Contains a Dockerfile for building an docker image and its container for the Software and BSP using buildroot.
+A Dockerfile for building an 32 bit docker image and its container for the Software and BSP using buildroot.
 
 
 ## Build
