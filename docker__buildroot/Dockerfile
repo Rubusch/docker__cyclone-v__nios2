@@ -99,10 +99,9 @@ RUN sudo su $USER -c "mkdir -p /home/$USER/configs"
 RUN chown $USER:$USER -R /home/$USER/linux
 RUN chown $USER:$USER -R /home/$USER/configs
 
-RUN cd /home/$USER && git clone -j4 --depth=1 --branch lothar/2020.05.x-nios2 https://github.com/Rubusch/buildroot.git buildroot
-
 ## alternatively get official buildrooot
-#RUN git clone -j4 --depth=1 https://github.com/buildroot/buildroot.git buildroot
+# FIXME permissions in folder 'buildroot'    
+RUN cd /home/$USER && git clone -j4 --depth=1 --branch lothar/2020.05.x-nios2 https://github.com/Rubusch/buildroot.git buildroot
 RUN chown $USER:$USER -R /home/$USER/buildroot
 
 ## toolchain: code sourcery
