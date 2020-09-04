@@ -13,7 +13,6 @@ ARG USER=""
 ## set up apt fully functional
 RUN apt-get update && apt-get upgrade -y && apt-get autoremove -y --purge
 RUN apt-get install -y  \
-    build-essential \
     zlib1g-dev \
     g++ \
     build-essential \
@@ -37,7 +36,6 @@ RUN apt-get install -y  \
 ## for building documentation targets
 #RUN apt-get install -y  \
 #    kmod \
-#    cpio \
 #    imagemagick \
 #    graphviz \
 #    dvipng \
@@ -50,6 +48,7 @@ RUN apt-get install -y  \
 
 ## for building development environment
 RUN apt-get install -y  \
+    cpio \
     openjdk-11-jdk-headless \
     openjdk-11-jdk \
     vim \
