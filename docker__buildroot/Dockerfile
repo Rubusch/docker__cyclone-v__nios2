@@ -35,18 +35,18 @@ RUN apt-get install -y  \
     wget
 
 ## for building documentation targets
-RUN apt-get install -y  \
-    kmod \
-    cpio \
-    imagemagick \
-    graphviz \
-    dvipng \
-    fonts-noto-cjk \
-    latexmk \
-    librsvg2-bin \
-    virtualenv \
-    python3-sphinx \
-    python3-sphinx-rtd-theme
+#RUN apt-get install -y  \
+#    kmod \
+#    cpio \
+#    imagemagick \
+#    graphviz \
+#    dvipng \
+#    fonts-noto-cjk \
+#    latexmk \
+#    librsvg2-bin \
+#    virtualenv \
+#    python3-sphinx \
+#    python3-sphinx-rtd-theme
 
 ## for building development environment
 RUN apt-get install -y  \
@@ -62,10 +62,7 @@ RUN apt-get install -y  \
     bison \
     flex \
     libelf-dev \
-    bc
-
-## my add ons for patch development
-RUN apt-get install -y  \
+    bc \
     aptitude \
     tig \
     emacs-nox \
@@ -109,23 +106,26 @@ RUN cd /home/$USER && git clone -j4 --depth=1 --branch lothar/2020.05.x-nios2 ht
 #RUN git clone -j4 --depth=1 https://github.com/buildroot/buildroot.git buildroot
 RUN chown $USER:$USER -R /home/$USER/buildroot
 
-## toolchain
-## source package (installer is not supposed to work, read preamble), most releases don't publish a .bin file!!!
+## toolchain: code sourcery
+##
+## "Source TAR" (installer is not supposed to work, read preamble), most releases don't publish a .bin file!!!
 #RUN cd /home/$USER && wget https://sourcery.mentor.com/GNUToolchain/package15987/public/nios2-linux-gnu/sourceryg++-2020.08-3-nios2-linux-gnu.src.tar.bz2
 #RUN cd /home/$USER && tar xjf sourceryg++-2020.08-3-nios2-linux-gnu.src.tar.bz2
 #RUN chmod a+x /home/$USER/sourceryg++-2020.08-3-nios2-linux-gnu/sourceryg++-2020.08-3-nios2-linux-gnu.sh
 
-## .bin file
+## ".bin file"
 #ARG TOOLCHAIN="sourceryg++-2018.05-5-nios2-linux-gnu.bin"
 #RUN cd /home/$USER && wget https://sourcery.mentor.com/GNUToolchain/package15406/public/nios2-linux-gnu/${TOOLCHAIN}
 #RUN chown $USER:$USER -R /home/$USER/${TOOLCHAIN}
 #RUN chmod a+x /home/$USER/${TOOLCHAIN}
 
-## "advanced" (but binary tarball)
-RUN cd /home/$USER && wget https://sourcery.mentor.com/GNUToolchain/package15404/public/nios2-linux-gnu/sourceryg++-2018.05-5-nios2-linux-gnu-i686-pc-linux-gnu.tar.bz2
+## "advanced TAR" (binary tarball)
+RUN cd /home/$USER/ && wget https://sourcery.mentor.com/GNUToolchain/package15404/public/nios2-linux-gnu/sourceryg++-2018.05-5-nios2-linux-gnu-i686-pc-linux-gnu.tar.bz2
 RUN cd /home/$USER && tar xjf sourceryg++-2018.05-5-nios2-linux-gnu-i686-pc-linux-gnu.tar.bz2
 RUN cp -arf /home/$USER/sourceryg++-2018.05/* /usr/local/
 RUN chown $USER:$USER -R /usr/local
+RUN rm -f /home/$USER/sourceryg++-2018.05-5-nios2-linux-gnu-i686-pc-linux-gnu.tar.bz2
+RUN rm -rf /home/$USER/sourceryg++-2018.05
 
 ## u-boot
 #RUN cd /home/$USER && git clone -j4 https://github.com/altera-opensource/u-boot-socfpga.git u-boot
