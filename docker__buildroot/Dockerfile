@@ -1,4 +1,4 @@
-FROM i386/debian:10
+FROM debian:10
 MAINTAINER Lothar Rubusch <l.rubusch@gmail.com>
 WORKDIR /root
 ENV DEBIAN_FRONTEND=noninteractive
@@ -48,6 +48,7 @@ RUN apt-get install -y  \
 
 ## for building development environment
 RUN apt-get install -y  \
+    libc6-i386 \
     u-boot-tools \
     cpio \
     openjdk-11-jdk-headless \
@@ -101,11 +102,13 @@ RUN chown $USER:$USER -R /home/$USER/linux
 RUN chown $USER:$USER -R /home/$USER/configs
 
 ## alternatively get official buildrooot
-# FIXME permissions in folder 'buildroot'    
+## NB: buildroot/dl and buildroot/output will be mounted, thus will have
+##     root ownership (use chown later)
 RUN cd /home/$USER && git clone -j4 --depth=1 --branch lothar/2020.05.x-nios2 https://github.com/Rubusch/buildroot.git buildroot
 RUN chown $USER:$USER -R /home/$USER/buildroot
 
 ## toolchain: code sourcery
+## (code sourcery toolchain will be downloaded by buildroot)
 ##
 ## "Source TAR" (installer is not supposed to work, read preamble), most releases don't publish a .bin file!!!
 #RUN cd /home/$USER && wget https://sourcery.mentor.com/GNUToolchain/package15987/public/nios2-linux-gnu/sourceryg++-2020.08-3-nios2-linux-gnu.src.tar.bz2
