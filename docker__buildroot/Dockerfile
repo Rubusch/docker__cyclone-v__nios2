@@ -33,19 +33,6 @@ RUN apt-get install -y  \
     sudo \
     wget
 
-## for building documentation targets
-#RUN apt-get install -y  \
-#    kmod \
-#    imagemagick \
-#    graphviz \
-#    dvipng \
-#    fonts-noto-cjk \
-#    latexmk \
-#    librsvg2-bin \
-#    virtualenv \
-#    python3-sphinx \
-#    python3-sphinx-rtd-theme
-
 ## for building development environment
 RUN apt-get install -y  \
     libc6-i386 \
@@ -132,14 +119,14 @@ RUN chown $USER:$USER -R /home/$USER/buildroot
 ## NOTE: buildroot (2020.x) can download and install code sourcery toolchain autonomously!!!       
 
 ## u-boot
-#RUN cd /home/$USER && git clone -j4 https://github.com/altera-opensource/u-boot-socfpga.git u-boot
-RUN cd /home/$USER && git clone -j4 --branch lothar/develop https://github.com/Rubusch/u-boot.git u-boot
-RUN chown $USER:$USER -R /home/$USER/u-boot
+# TODO obtain u-boot via buildroot          
+#RUN cd /home/$USER && git clone -j4 --branch lothar/develop https://github.com/Rubusch/u-boot.git u-boot
+#RUN chown $USER:$USER -R /home/$USER/u-boot
 
 ## kernel
-#RUN cd /home/$USER && git clone https://github.com/altera-opensource/linux-socfpga.git linux
-RUN cd /home/$USER && git clone --branch lothar/develop https://github.com/Rubusch/linux.git linux
-RUN chown $USER:$USER -R /home/$USER/linux
+# TODO obtain kernel via buildroot          
+#RUN cd /home/$USER && git clone --branch lothar/develop https://github.com/Rubusch/linux.git linux
+#RUN chown $USER:$USER -R /home/$USER/linux
 
 
 ################################################################################
