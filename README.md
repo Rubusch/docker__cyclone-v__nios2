@@ -1,6 +1,6 @@
 # Build Container for my linux on NIOS2 (softcore on Altera/Intel's DE1-SoC Board)
 
-A Dockerfile for building a docker image and its container for the Software and BSP using buildroot.  
+Nios II is a 32-bit embedded-processor architecture designed specifically for the Altera family of FPGAs. A Dockerfile for building a docker image for the Software and BSP using buildroot.  
 
 The image uses the code sourcery toolchain (build up by buildroot or in comments downloaded from mentor graphics directly), the toolchain is 32bit thus needs libc6 32bit support.  
 
