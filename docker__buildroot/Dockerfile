@@ -81,11 +81,9 @@ RUN sed -i '/%sudo/s/.*/%sudo   ALL=NOPASSWD: ALL/' /etc/sudoers
 ################################################################################
 ## get (my) sources
 ## prepare paths
-RUN sudo su $USER -c "mkdir -p /home/$USER/linux"
 RUN sudo su $USER -c "mkdir -p /home/$USER/configs"
 
 ## reset permissions
-RUN chown $USER:$USER -R /home/$USER/linux
 RUN chown $USER:$USER -R /home/$USER/configs
 
 ## alternatively get official buildrooot
@@ -116,17 +114,9 @@ RUN chown $USER:$USER -R /home/$USER/buildroot
 #RUN rm -f /home/$USER/sourceryg++-2018.05-5-nios2-linux-gnu-i686-pc-linux-gnu.tar.bz2
 #RUN rm -rf /home/$USER/sourceryg++-2018.05
 
-## NOTE: buildroot (2020.x) can download and install code sourcery toolchain autonomously!!!       
-
-## u-boot
-# TODO obtain u-boot via buildroot          
-#RUN cd /home/$USER && git clone -j4 --branch lothar/develop https://github.com/Rubusch/u-boot.git u-boot
-#RUN chown $USER:$USER -R /home/$USER/u-boot
-
-## kernel
-# TODO obtain kernel via buildroot          
-#RUN cd /home/$USER && git clone --branch lothar/develop https://github.com/Rubusch/linux.git linux
-#RUN chown $USER:$USER -R /home/$USER/linux
+## NOTE: buildroot (2020.x) downloads specific code sourcery toolchain
+## NOTE: buildroot (2020.x) downloads specific u-boot
+## NOTE: buildroot (2020.x) downloads specific kernel
 
 
 ################################################################################
