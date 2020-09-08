@@ -4,6 +4,8 @@ Nios II is a 32-bit embedded-processor architecture designed specifically for th
 
 The image uses the code sourcery toolchain (build up by buildroot or in comments downloaded from mentor graphics directly), the toolchain is 32bit thus needs libc6 32bit support.  
 
+![The minimal Nios2 logic design on a DE1 SoC Board](pics/qsys.jpg)
+
 ## Build
 
 ```
