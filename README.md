@@ -43,12 +43,6 @@ $ docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/configs:/
 
 ## Image
 
-### Login
-
-u: root  
-p: N/A  
-
-
 ### U-Boot - DTS
 
 Generate the ``sopc2dts.jar`` file  
@@ -73,8 +67,15 @@ $ java -jar ./sopc2dts.jar --force-altr -i ./linux_hw.sopcinfo -o linux_hw.dts
 ```
 
 
+## Deployment
 
-### Deployment
+### Login
+
+u: root  
+p: N/A  
+
+
+### Flash the NIOS 2 System to the target
 
 Flash logic design from quartus to the board, connect via USB blaster II. Generate the .cdf file. Easiest is via graphical Programmer in Quartus, once the *C*hain *D*escription *F*ile was saved, then _quartus_pgm_ can use it from off the shell.  
 
@@ -92,9 +93,29 @@ $ quartus_pgm --debug  -m jtag -c 1 -o "p;./output_files/linux_hw.sof@2"
 Where ``-o <options>;<input_file>@<device_index`` is to be applied, i.e. FPGA is of index 2 on my DE1 SoC board, so I take ``@2``.  
 
 
+### Build e.g. U-Boot
+
+Best is to set up a docker container with the corresponding toolchain (Mentor Graphics Code Sourcery).   
+
+Note: there are several releases, which only contain the SOURCE packages. As can be read in the .sh file (Linux) this is not for installation, but only for "understanding how Mentor Graphics builds toolchains". Some other Editions, also contain binary packages, which then can be installed on 32bit Linux or Linux with compatibility 32bit libc package installed. In general a better approach is to get buildroot, and build the BSP or SDK from there. Buildroot fetches and sets up the latest Code Sourcery Toolchain.   
+
+Then go into the sources, e.g. cloned u-boot sources, adjust  
+* ``./configs/my_nios2_defconfig`` (template e.g. ``10m50_devconfig``)  
+* ``./include/configs/my_nios2.h`` (template e.g. ``10m50_devboard.h``)  
+* ``./arch/nios2/dts/my_nios2.dts`` (generated from ``sopc2dts.jar`` as above, template ``10m50_devboard.dts``)  
+
+
+### Flash the U-Boot
+
 Now via the ``nios2-download`` and ``nios2-flash-programmer`` tools try to flash the images to the board.  
 
+references: https://rocketboards.org/foswiki/Documentation/NiosIILinuxUserManualForCycloneIII
+
 ```
+TODO
+$ nios2-download -g -r u-boot.srec
+
+$ nios2-terminal
 TODO
 ```
 
