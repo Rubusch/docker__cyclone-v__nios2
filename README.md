@@ -109,7 +109,12 @@ Then go into the sources, e.g. cloned u-boot sources, adjust
 
 Now via the ``nios2-download`` and ``nios2-flash-programmer`` tools try to flash the images to the board.  
 
-references: https://rocketboards.org/foswiki/Documentation/NiosIILinuxUserManualForCycloneIII
+references:  
+
+* https://rocketboards.org/foswiki/Documentation/NiosIILinuxUserManualForCycloneIII
+* https://www.intel.com/content/dam/www/programmable/us/en/pdfs/literature/ug/niosii_generic_booting_methods.pdf
+
+Using the Compact Flash Interface (CFI) TODO  
 
 ```
 TODO
