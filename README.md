@@ -113,6 +113,7 @@ references:
 
 * https://rocketboards.org/foswiki/Documentation/NiosIILinuxUserManualForCycloneIII
 * https://www.intel.com/content/dam/www/programmable/us/en/pdfs/literature/ug/niosii_generic_booting_methods.pdf
+* https://www.intel.cn/content/dam/altera-www/global/zh_CN/pdfs/literature/an/an458.pdf
 
 Using the Compact Flash Interface (CFI) TODO  
 
