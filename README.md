@@ -43,7 +43,13 @@ $ docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/configs:/
 
 ## Image
 
-### U-Boot - DTS
+### Login
+
+u: root  
+p: N/A  
+
+
+### DTS
 
 Generate the ``sopc2dts.jar`` file  
 
@@ -68,12 +74,6 @@ $ java -jar ./sopc2dts.jar --force-altr -i ./linux_hw.sopcinfo -o linux_hw.dts
 
 
 ## Deployment
-
-### Login
-
-u: root  
-p: N/A  
-
 
 ### Flash the NIOS 2 System to the target
 
