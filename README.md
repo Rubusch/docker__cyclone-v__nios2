@@ -136,6 +136,26 @@ $ nios2-terminal
 TODO
 ```
 
+EPCS boot, trying to convert u-boot to a u-boot.flash  
+```
+$ find /opt/intelFPGA/18.1std/ -name boot_loader_cfi.srec
+    /opt/intelFPGA/18.1std/nios2eds/components/altera_nios2/boot_loader_cfi.srec
+    /opt/intelFPGA/18.1std/ip/altera/nios2_ip/altera_nios2/boot_loader_cfi.srec
+
+$ elf2flash --base=0x0 --epcs --end=0xc7FFFFFF --boot=/opt/intelFPGA/18.1std/ip/altera/nios2_ip/altera_nios2/boot_loader_cfi.srec --input=u-boot --output=u-boot.flash
+
+FIXME:
+in epcs mode, base address has to be 0x0!
+$ elf2flash --base=0x0 --epcs --end=0xc7FFFFFF --verbose --boot=/opt/intelFPGA/18.1std/ip/altera/nios2_ip/altera_nios2/boot_loader_cfi.srec --debug --input=u-boot --output=u-boot.flash
+
+
+## debug
+
+$ elf2flash --base=0x0 --epcs --end=0xc7FFFFFF --verbose --boot=/opt/intelFPGA/18.1std/ip/altera/nios2_ip/altera_nios2/boot_loader_cfi.srec --debug --input=u-boot --output=u-boot.flash
+
+$ nios2-download -g u-boot.flash && nios2-terminal -v
+```
+
 
 ### Tricks
 
