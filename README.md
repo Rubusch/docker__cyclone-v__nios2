@@ -105,6 +105,17 @@ Then go into the sources, e.g. cloned u-boot sources, adjust
 * ``./arch/nios2/dts/my_nios2.dts`` (generated from ``sopc2dts.jar`` as above, template ``10m50_devboard.dts``)  
 
 
+configure serial path property to the chosen node, like this,  
+    chosen {
+        stdout-path = &uart_0;
+    ;
+
+using SPI/EPCS or I2C, in case sequence the interfaces by serial number  
+    aliases {
+        spi0 = &epcs_controller;
+    };
+
+
 ### Flash U-Boot to the target
 
 Now via the ``nios2-download`` and ``nios2-flash-programmer`` tools try to flash the images to the board.  
