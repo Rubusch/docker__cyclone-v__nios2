@@ -136,6 +136,11 @@ $ nios2-terminal
 TODO
 ```
 
+EPCS boot
+* select EPCS component in QSYS
+* In Quartus go to **Assignments** (menu), there select **Device..**. There is a button **Device and Pin Options..**. Under **Configuration** change configuration from _Passive Serial_ to one of the _Active Serial_ settings, in case also additionally change the _Configuration Device_ from _auto_ to _EPCS1_ or so
+
+
 EPCS boot, trying to convert u-boot to a u-boot.flash  
 ```
 $ find /opt/intelFPGA/18.1std/ -name boot_loader_cfi.srec
