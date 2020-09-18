@@ -137,9 +137,20 @@ TODO
 ```
 
 EPCS boot
+* set the MSEL to allow for AS (**A**ctive **S**erial)
 * select EPCS component in QSYS
 * In Quartus go to **Assignments** (menu), there select **Device..**. There is a button **Device and Pin Options..**. Under **Configuration** change configuration from _Passive Serial_ to one of the _Active Serial_ settings, in case also additionally change the _Configuration Device_ from _auto_ to _EPCS1_ or so
 
+EPCS (by document)
+```
+$ bin2flash --input=u-boot --output=u-boot.flash --location=0x0060000
+
+$ nios2-flash-programmer --base=0x0 --epcs u-boot.flash
+
+$ nios2-download -r -g
+
+$ nios2-terminal
+```
 
 EPCS boot, trying to convert u-boot to a u-boot.flash  
 ```
