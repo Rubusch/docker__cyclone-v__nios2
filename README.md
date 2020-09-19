@@ -59,10 +59,10 @@ $ cd sopc2dts
 $ make
 ```
 
-Copy .jar file   
+Copy .jar file to the quartus project  
 
 ```
-$ cd ..
+$ cd <quartus project dir>
 $ cp ./sopc2dts/sopc2dts.jar .
 ```
 
@@ -71,6 +71,10 @@ Generate .dts file
 ```
 $ java -jar ./sopc2dts.jar --force-altr -i ./linux_hw.sopcinfo -o linux_hw.dts
 ```
+
+In case of failing / unknown components try to adjust alias in ``sopc_components_altera.xml`` of the sopc2dts project.  
+
+Copy the resulting ``.dts`` file to the u-boot buildenvironment used later.  
 
 
 ## Hardware
@@ -125,7 +129,7 @@ $ ls -l
 $ tar xzf nios2-buildroot-linux-gnu_sdk-buildroot.tar.gz
 ```
 
-Source environment and prepare the following:  
+Source environment and prepare the following (alternatively copy it to ``/usr/local/bin``:  
 
 ```
 $ export PATH=$PATH:/home/$(whoami)/buildroot/output/images/nios2-buildroot-linux-gnu_sdk-buildroot/bin
