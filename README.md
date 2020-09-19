@@ -73,7 +73,7 @@ $ java -jar ./sopc2dts.jar --force-altr -i ./linux_hw.sopcinfo -o linux_hw.dts
 ```
 
 
-## Deployment
+## Hardware
 
 ### Flash the NIOS 2 System to the target
 
@@ -91,6 +91,50 @@ $ quartus_pgm --debug  -m jtag -c 1 -o "p;./output_files/linux_hw.sof@2"
 ```
 
 Where ``-o <options>;<input_file>@<device_index`` is to be applied, i.e. FPGA is of index 2 on my DE1 SoC board, so I take ``@2``.  
+
+
+
+
+## Software
+
+### Toolchain
+
+Enter the docker container as above mentioned ``docker run``, then execute  
+
+```
+$ cd ~/buildroot
+
+$ cp ~/configs/lothars__buildroot__nios2_defconfig ./configs/
+
+$ make lothars__buildroot__nios2_defconfig
+
+$ make sdk
+
+$ cd ./output/images/
+
+$ ls -l
+    total 198288
+    -rw-r--r-- 1 user user 114957893 Sep 19 20:51 nios2-buildroot-linux-gnu_sdk-buildroot.tar.gz
+    -rw-r--r-- 1 user user   5888512 Sep 19 20:50 rootfs.cpio
+    -rw-r--r-- 1 user user   5888576 Sep 19 20:50 rootfs.cpio.uboot
+    -rw-r--r-- 1 user user   2985832 Sep 19 20:50 rootfs.jffs2
+    -rw-r--r-- 1 user user   6461440 Sep 19 20:50 rootfs.tar
+    -rw-r--r-- 1 user user    274306 Sep  8 20:00 u-boot.bin
+    -rw-r--r-- 1 user user  66583552 Sep  6 23:55 vmlinux
+
+$ tar xzf nios2-buildroot-linux-gnu_sdk-buildroot.tar.gz
+```
+
+Source environment and prepare the following:  
+
+```
+$ export PATH=$PATH:/home/$(whoami)/buildroot/output/images/nios2-buildroot-linux-gnu_sdk-buildroot/bin
+$ export ARCH=nios2
+$ export CROSS_COMPILE=nios2-linux-gnu-
+
+```
+
+Now inside the docker container in case ``git clone`` the u-boot source in the output folder and compile with the sourced enviornment (above)  
 
 
 ### Build U-Boot
