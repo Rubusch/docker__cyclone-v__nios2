@@ -129,19 +129,21 @@ $ ls -l
 $ tar xzf nios2-buildroot-linux-gnu_sdk-buildroot.tar.gz
 ```
 
-Source environment and prepare the following (alternatively copy it to ``/usr/local/bin``:  
+Source some environment variables and prepare the following PATH (alternatively copy it to ``/usr/local/bin``)  
+
+
+### Build U-Boot
+
+Environment based on toolchain  
 
 ```
-$ export PATH=$PATH:/home/$(whoami)/buildroot/output/images/nios2-buildroot-linux-gnu_sdk-buildroot/bin
+$ export PATH=/home/$(whoami)/buildroot/output/images/nios2-buildroot-linux-gnu_sdk-buildroot/bin:$PATH
 $ export ARCH=nios2
 $ export CROSS_COMPILE=nios2-linux-gnu-
 
 ```
 
 Now inside the docker container in case ``git clone`` the u-boot source in the output folder and compile with the sourced enviornment (above)  
-
-
-### Build U-Boot
 
 Best is to set up a docker container with the corresponding toolchain (Mentor Graphics Code Sourcery).   
 
