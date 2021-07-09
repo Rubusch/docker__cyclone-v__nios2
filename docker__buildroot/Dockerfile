@@ -31,10 +31,7 @@ RUN apt-get install -y  \
     tree \
     colordiff \
     sudo \
-    wget
-
-## for building development environment
-RUN apt-get install -y  \
+    wget \
     libc6-i386 \
     u-boot-tools \
     cpio \
