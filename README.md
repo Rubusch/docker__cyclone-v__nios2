@@ -156,15 +156,20 @@ Then go into the sources, e.g. cloned u-boot sources, adjust
 
 
 configure serial path property to the chosen node, like this,  
+
+```
     chosen {
         stdout-path = &uart_0;
     ;
+```
 
 using SPI/EPCS or I2C, in case sequence the interfaces by serial number  
+
+```
     aliases {
         spi0 = &epcs_controller;
     };
-
+```
 
 ### Flash U-Boot to the target
 
@@ -180,7 +185,7 @@ Using the Compact Flash Interface (CFI) TODO
 
 ```
 TODO
-$ nios2-download -g -r u-boot.srec
+$ nios2-download -g -r u-boot
 
 $ nios2-terminal
 TODO
