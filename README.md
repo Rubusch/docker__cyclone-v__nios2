@@ -6,38 +6,34 @@ The image uses the code sourcery toolchain (build up by buildroot or in comments
 
 ![The minimal Nios2 logic design on a DE1 SoC Board](pics/qsys.png)
 
+
+
+## Tools Needed
+
+```
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+$ sudo chmod a+x /usr/local/bin/docker-compose
+```
+
+NB: Where 1.28.6 is the latest version (currently not supported by devian/ubuntu package management)
+
+
 ## Build
 
 ```
 $ cd ./docker__buildroot
-
-$ time docker build --build-arg USER=$USER -t rubuschl/nios2-buildroot:$(date +%Y%m%d%H%M%S) .
-    10m...
+$ docker-compose up
 ```
 
-Use ```--no-cache``` to re-build the base docker image.
 
-
-## Usage
+## Usage & Debug
 
 ```
-$ docker images
-    REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
-    rubuschl/nios2-buildroot 20191104161353      cbf4cb380168        24 minutes ago      10.5GB
-    ubuntu                      xenial              5f2bf26e3524        4 days ago          123MB
+$ cd docker__buildroot
+$ docker-compose -f ./docker-compose.yml run --rm bbb_buildroot /bin/bash
 
-$ time docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/configs:/home/$USER/configs -v $PWD/dl:/home/$USER/buildroot/dl -v $PWD/output:/home/$USER/buildroot/output rubuschl/nios2-buildroot:20191104161353
-```
-
-## Debug
-
-```
-$ docker images
-    REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
-    rubuschl/nios2-buildroot 20191104161353      cbf4cb380168        24 minutes ago      10.5GB
-    ubuntu                      xenial              5f2bf26e3524        4 days ago          123MB
-
-$ docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/configs:/home/$USER/configs -v $PWD/dl:/home/$USER/buildroot/dl -v $PWD/output:/home/$USER/buildroot/output rubuschl/nios2-buildroot:20191104161353 /bin/bash
+## manually call build script
+docker $> build.sh
 ```
 
 
