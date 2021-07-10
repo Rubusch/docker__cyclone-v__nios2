@@ -1,3 +1,5 @@
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
+
 # Build Container for my linux on NIOS2 (softcore on Altera/Intel's DE1-SoC Board)
 
 Nios II is a 32-bit embedded-processor architecture designed specifically for the Altera family of FPGAs. A Dockerfile for building a docker image for the Software and BSP using buildroot.  
