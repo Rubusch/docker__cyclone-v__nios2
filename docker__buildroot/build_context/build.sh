@@ -1,34 +1,32 @@
-#!/bin/bash -e
+#!/bin/sh -e
 
 MY_USER="$(whoami)"
 MY_HOME="$(pwd)"
 SSH_DIR="${MY_HOME}/.ssh"
 SSH_KNOWN_HOSTS="${SSH_DIR}/known_hosts"
 CONFIGS_DIR="${MY_HOME}/configs"
-BR_DIR="${MY_HOME}/poky"
-BUILD_DIR="${BR_DIR}/build"
-MY_CYCLONE5_CONF="${BR_DIR}/meta-lothars-cyclone5/conf"
+BR_DIR="${MY_HOME}/buildroot"
 
 BR_DEFCONFIG=lothars__nios2_defconfig
 
 ## permissions
 for item in "${BR_DIR}" "${SSH_DIR}" "${MY_HOME}/.gitconfig" "${CONFIGS_DIR}"; do
-    if [ ! "${MY_USER}" == "$( stat -c %U ${item} )" ]; then
+    if [ ! "${MY_USER}" = "$( stat -c %U "${item}" )" ]; then
         ## may take some time
         sudo chown "${MY_USER}:${MY_USER}" -R "${item}"
     fi
 done
 
 ## ssh known_hosts
-touch ${SSH_KNOWN_HOSTS}
+touch "${SSH_KNOWN_HOSTS}"
 for item in "github.com" "bitbucket.org"; do
-    if [ "" == "$( grep ${item} -r ${SSH_KNOWN_HOSTS} )" ]; then
-        ssh-keyscan ${item} >> "${SSH_KNOWN_HOSTS}"
+    if [ "" = "$( grep "${item}" -r "${SSH_KNOWN_HOSTS}" )" ]; then
+        ssh-keyscan "${item}" >> "${SSH_KNOWN_HOSTS}"
     fi
 done
 
 ## initial clone
-FIRST="$(ls -A ${BR_DIR}/)"
+FIRST="$(ls -A "${BR_DIR}"/ )"
 if [ -z "${FIRST}" ]; then
     cd "${MY_HOME}"
     git clone -j4 --depth=1 --branch lothar/2020.05.x-nios2 https://github.com/Rubusch/buildroot.git buildroot
@@ -67,11 +65,11 @@ fi
 
 
 ## buildroot defconfig
-test -f ${CONFIGS_DIR}/${BR_DEFCONFIG} && cp ${CONFIGS_DIR}/${BR_DEFCONFIG} ${BR_DIR}/configs/
+test -f "${CONFIGS_DIR}/${BR_DEFCONFIG}" && cp "${CONFIGS_DIR}/${BR_DEFCONFIG}" "${BR_DIR}/configs/"
 
 
-cd ${BR_DIR}
-make defconfig ${BR_DEFCONFIG}
+cd "${BR_DIR}"
+make defconfig "${BR_DEFCONFIG}"
 make -j8
 
 ## kernel

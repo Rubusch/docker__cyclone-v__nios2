@@ -22,5 +22,5 @@ services:
           - ~/.ssh:/home/$USER/.ssh
           - ./buildroot:/home/$USER/buildroot ## folder does not need to be around
           - type: bind
-            source: ./meta-lothars-configs ## folder must be around
-            target: /home/$USER/meta-lothars-configs
+            source: ./build_configs ## folder must be around
+            target: /home/$USER/configs
