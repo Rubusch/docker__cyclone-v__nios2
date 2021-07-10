@@ -30,7 +30,7 @@ $ docker-compose up
 
 ```
 $ cd docker__buildroot
-$ docker-compose -f ./docker-compose.yml run --rm bbb_buildroot /bin/bash
+$ docker-compose -f ./docker-compose.yml run --rm nios2 /bin/bash
 
 ## manually call build script
 docker $> build.sh
