@@ -4,5 +4,4 @@
 *.orig
 
 ## ignore output folder
-output
-dl
+buildroot
