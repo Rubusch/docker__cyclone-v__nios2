@@ -9,6 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ## in case docker complains for a not set USER, perhaps you forgot to use --build-arg USER=$USER
 ARG USER=""
 
+
 ################################################################################
 ## set up apt fully functional
 RUN apt-get update && apt-get upgrade -y && apt-get autoremove -y --purge
@@ -78,16 +79,10 @@ RUN sed -i '/%sudo/s/.*/%sudo   ALL=NOPASSWD: ALL/' /etc/sudoers
 ################################################################################
 ## get (my) sources
 ## prepare paths
-RUN sudo su $USER -c "mkdir -p /home/$USER/configs"
-
-## reset permissions
-RUN chown $USER:$USER -R /home/$USER/configs
 
 ## alternatively get official buildrooot
-## NB: buildroot/dl and buildroot/output will be mounted, thus will have
-##     root ownership (use chown later)
-RUN cd /home/$USER && git clone -j4 --depth=1 --branch lothar/2020.05.x-nios2 https://github.com/Rubusch/buildroot.git buildroot
-RUN chown $USER:$USER -R /home/$USER/buildroot
+## NB: buildroot/dl and buildroot/output will be mounted, thus may have root ownership (use chown later)
+#    RUN git clone -j4 --depth=1 --branch lothar/2020.05.x-nios2 https://github.com/Rubusch/buildroot.git buildroot
 
 ## toolchain: code sourcery
 ## (code sourcery toolchain will be downloaded by buildroot)
@@ -119,20 +114,25 @@ RUN chown $USER:$USER -R /home/$USER/buildroot
 ################################################################################
 ## set up tools
 
+USER ${USER}
+WORKDIR /home/${USER}
+
+RUN mkdir -p /home/$USER/configs
+
 ## bash config
-RUN cd /home/$USER && sudo su $USER -c "rm -f /home/$USER/.bashrc" && sudo su $USER -c "ln -s /home/$USER/configs/.bashrc /home/$USER/"
+RUN rm -f /home/${USER}/.bashrc && ln -s /home/$USER/configs/.bashrc /home/$USER/
 
 ## vim config
-RUN cd /home/$USER && sudo su $USER -c "rm -f /home/$USER/.vimrc" && sudo su $USER -c "ln -s /home/$USER/configs/.vimrc /home/$USER/"
+RUN rm -f /home/${USER}/.vimrc && ln -s /home/$USER/configs/.vimrc /home/$USER/
 
 ## emacs config
-RUN cd /home/$USER && sudo su $USER -c "rm -f /home/$USER/.emacs" && sudo su $USER -c "ln -s /home/$USER/configs/.emacs /home/$USER/"
+RUN rm -f /home/${USER}/.emacs && ln -s /home/$USER/configs/.emacs /home/$USER/
 
-## git config
-RUN cd /home/$USER && sudo su $USER -c "git config --global alias.st status"
-RUN cd /home/$USER && sudo su $USER -c "git config --global alias.ci commit"
-RUN cd /home/$USER && sudo su $USER -c "git config --global alias.co checkout"
-RUN cd /home/$USER && sudo su $USER -c "git config --global alias.br branch"
+## ssh
+RUN mkdir -p /home/${USER}/.ssh
+
+
+USER root
 
 ## codespell: dictionary fix
 RUN mkdir -p /usr/share/codespell

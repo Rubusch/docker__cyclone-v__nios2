@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+    nios2:
+        container_name: nios2
+        image: ${USER}/nios2
+        build:
+            context: build_context
+            dockerfile: Dockerfile
+            args:
+                USER: ${USER}
+        user: ${USER}            ## docker run --user=$USER
+        stdin_open: true         ## docker run -i
+        tty: true                ## docker run -t
+        #privileged: true
+
+        environment:
+          - USER
+
+        volumes:
+          - ~/.gitconfig:/home/$USER/.gitconfig
+          - ~/.ssh:/home/$USER/.ssh
+          - ./buildroot:/home/$USER/buildroot ## folder does not need to be around
+          - type: bind
+            source: ./meta-lothars-configs ## folder must be around
+            target: /home/$USER/meta-lothars-configs
