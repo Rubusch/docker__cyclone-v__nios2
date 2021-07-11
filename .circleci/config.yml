@@ -1,0 +1,20 @@
+version: 2.1
+jobs:
+    build_buildroot:
+        machine: true
+        steps:
+        ## install more recent version of docker-compose
+          - run: sudo curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          - run: sudo chmod a+x /usr/local/bin/docker-compose
+
+        ## buildroot
+          - checkout
+          - run: cd ./docker__buildroot && docker-compose up
+
+## parallelization
+workflows:
+    version: 2
+    build:
+        jobs:
+          - build_buildroot
+
