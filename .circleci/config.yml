@@ -9,7 +9,7 @@ jobs:
 
         ## buildroot
           - checkout
-          - run: cd ./docker__buildroot && docker-compose up
+          - run: cd ./docker__buildroot && docker-compose up --exit-code-from nios2
 
 ## parallelization
 workflows:
